@@ -1,7 +1,20 @@
-{% extends "layout.html" %}
+{% include 'navbar.html' %}
 
-{% block content %}
-    <div class="content">
-        <h1>test</h1>
+
+<div class="container mt-4">
+    {% for row_start in range(0, card_data|length, 3) %}
+    <div class="row">
+      {% for card in card_data[row_start:row_start+3] %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ card.title }}</h5>
+            <p class="card-text">{{ card.content }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-{% endblock %}
+    {% endfor %}
+  </div>
+{% include 'footer.html' %}

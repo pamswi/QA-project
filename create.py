@@ -1,5 +1,5 @@
-from app import db, app, Customer, Product, Order, OrderItem
-import requests, os
+from application import db, app
+from models import Product, Customer, Order
 
 
 with app.app_context():

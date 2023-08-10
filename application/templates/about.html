@@ -1,7 +1,28 @@
-{% extends "layout.html" %}
+{% include 'navbar.html' %}
 
-{% block content %}
+
+<body>
     <div class="content">
-        <h1>test</h1>
+        <div class="section">
+            <h2 class="section-header">welcome to pizza shop</h2>
+            <div class="section-content">
+                <p>pic placeholder</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-header">Section 2</h2>
+            <div class="section-content">
+                <p>This is the content of section 2.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-header">Section 3</h2>
+            <div class="section-content">
+                <p>This is the content of section 3.</p>
+            </div>
+        </div>
     </div>
-{% endblock %}
+
+{% include 'footer.html' %}
