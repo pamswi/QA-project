@@ -1,7 +1,5 @@
 from application import db
 
-
-
 '''
 first we establish a connection with the shop database
 the following code sets up a database consisting of 4 tables: customers, products, orders and order_items
@@ -23,8 +21,6 @@ class Product(db.Model):
     product_name = db.Column(db.String(30))
     description = db.Column(db.String)
     price = db.Column(db.Integer)
-    img = db.Column(db.String)
-    veg = db.Column(db.Boolean)
     available = db.Column(db.Boolean, default=True)
 
     @classmethod
@@ -48,4 +44,7 @@ class OrderItem(db.Model):
     product_id = db.Column('product_id', db.Integer, db.ForeignKey('product.id'))
     quantity = db.Column(db.Integer)
     subtotal = db.Column(db.Integer)
+
+
+    
 

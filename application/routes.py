@@ -42,7 +42,7 @@ def products():
     for item in products:
         print(item.product_name)
 
-    return render_template ('products.html')
+    return render_template ('products.html', products=products)
 
 @app.route('/products/<product>')
 def view_product(product):

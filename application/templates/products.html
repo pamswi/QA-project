@@ -1,20 +1,21 @@
 {% include 'navbar.html' %}
 
-
-<div class="container mt-4">
-    {% for row_start in range(0, card_data|length, 3) %}
-    <div class="row">
-      {% for card in card_data[row_start:row_start+3] %}
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ card.title }}</h5>
-            <p class="card-text">{{ card.content }}</p>
+<body>
+  <div class="container mt-4">
+      <div class="row">
+          {% for product in products %}
+          <div class="col-md-4 mb-4">
+              <div class="card">
+                  <img src="{{ url_for('static', filename=product.product_name + '.jpg') }}" class="card-img-top" alt="{{ product_name }}">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ product.product_name }}</h5>
+                      <p class="card-text">{{ product.description }}</p>
+                      <p class="card-text">${{ product.price }}</p>
+                  </div>
+              </div>
           </div>
-        </div>
+          {% endfor %}
       </div>
-      {% endfor %}
-    </div>
-    {% endfor %}
   </div>
+</body>
 {% include 'footer.html' %}
