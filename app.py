@@ -1,17 +1,15 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
+import os, requests
 from application import app
-
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-
-db = SQLAlchemy(app)
 
 '''
 first we establish a connection with the shop database
 the following code sets up a database consisting of 4 tables: customers, products, orders and order_items
 '''
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+db = SQLAlchemy(app)
+
 class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(30))
@@ -28,7 +26,10 @@ class Product(db.Model):
     product_name = db.Column(db.String(30))
     description = db.Column(db.String)
     price = db.Column(db.Integer)
+    img = db.Column(db.String)
+    veg = db.Column(db.Boolean)
     available = db.Column(db.Boolean, default=True)
+
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,19 +44,6 @@ class OrderItem(db.Model):
     quantity = db.Column(db.Integer)
     subtotal = db.Column(db.Integer)
 
-
-import requests
-
-url = "https://pizza-and-desserts.p.rapidapi.com/pizzas"
-
-headers = {
-	"X-RapidAPI-Key": "c0e4c58490mshd9e88fc7b6a083fp11049ajsn60ece8d68db4",
-	"X-RapidAPI-Host": "pizza-and-desserts.p.rapidapi.com"
-}
-
-response = requests.get(url, headers=headers)
-
-print(response.json())
 
 
 
