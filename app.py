@@ -44,20 +44,6 @@ class OrderItem(db.Model):
     subtotal = db.Column(db.Integer)
 
 
-import requests
-
-url = "https://pizza-and-desserts.p.rapidapi.com/pizzas"
-
-headers = {
-	"X-RapidAPI-Key": "c0e4c58490mshd9e88fc7b6a083fp11049ajsn60ece8d68db4",
-	"X-RapidAPI-Host": "pizza-and-desserts.p.rapidapi.com"
-}
-
-response = requests.get(url, headers=headers)
-
-print(response.json())
-
-
 
 
 
