@@ -1,7 +1,71 @@
-{% extends "layout.html" %}
+{% include 'navbar.html' %}
+<div class="container m5-4">
+    <form method="POST" action="{{ url_for('payment', customer_id=customer_id) }}">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="same-address">
+            <label class="form-check-label" for="same-address">Shipping address is the same as my billing
+                address</label>
+        </div>
 
-{% block content %}
-    <div class="content">
-        <h1>test</h1>
-    </div>
-{% endblock %}
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="save-info">
+            <label class="form-check-label" for="save-info">Save this information for next time</label>
+        </div>
+
+        <hr class="my-4">
+
+        <h4 class="mb-3">Payment</h4>
+
+        <div class="my-3">
+            <div class="form-check">
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                <label class="form-check-label" for="credit">Credit card</label>
+            </div>
+            <div class="form-check">
+                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                <label class="form-check-label" for="debit">Debit card</label>
+            </div>
+        </div>
+
+        <div class="row gy-3">
+            <div class="col-md-6">
+                <label for="card_name" class="form-label">Name on card</label>
+                <input type="text" class="form-control" id="card_name" placeholder="Full name" required>
+                <small class="text-muted">Full name as displayed on card</small>
+                <div class="invalid-feedback">
+                    Name on card is required
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="card_number" class="form-label">Credit card number</label>
+                <input type="text" class="form-control" id="card_number" placeholder="Card number" name="card_number" required>
+                <div class="invalid-feedback">
+                    Credit card number is required
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label for="card_exp" class="form-label">Expiration</label>
+                <input type="text" class="form-control" id="card_exp" placeholder="Expiration date" name="card_exp" required>
+                <div class="invalid-feedback">
+                    Expiration date required
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label for="card_cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" id="card_cvv" placeholder="CVV" name="card_cvv" required>
+                <div class="invalid-feedback">
+                    Security code required
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button class="btn btn-primary" type="submit">Place Order</button>
+        </div>
+    </form>
+</div>
+
+{% include 'footer.html' %}

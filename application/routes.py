@@ -1,6 +1,6 @@
 from application import app
-from flask import render_template, request, flash, redirect
-from models import Product, BasketItem
+from flask import render_template, request, flash, redirect, url_for
+from models import Product, BasketItem, Customer
 
 '''
 the following .py file defines all known routes across the site
@@ -33,18 +33,49 @@ def basket():
 def contact():
     return render_template ('contact.html')
 
-@app.route('/checkout')
+@app.route('/checkout', methods=["GET", "POST"])
 def checkout():
-    return render_template ('checkout.html')
+    products = BasketItem.all_basket()
+    details = []
+    if request.method == "POST":
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        email = request.form['email']
+        phone  = request.form['phone']
+        address = request.form['address']
 
-@app.route('/payment')
-def payment():
-    return render_template ('payment.html')
+        details.append({
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email,
+            'phone': phone,
+            'address': address
+        })
+        new_customer =Customer.add_customer(first_name, last_name, email, phone, address)
+        return redirect (url_for('payment', customer_id=new_customer.id))
+
+
+    return render_template ('checkout.html', products=products)
+
+@app.route('/payment/<int:customer_id>', methods=["GET", "POST"])
+def payment(customer_id):
+
+    if request.method == "POST":
+        card_number = request.form['card_number']
+        card_expiry = request.form['card_exp']
+        card_cvc = request.form['card_cvv']
+
+        update_customer = Customer.add_payment(customer_id, card_number, card_expiry, card_cvc)
+
+
+
+
+    return render_template ('payment.html', customer_id=customer_id)
 
 @app.route('/products', methods=["GET", "POST"])
 def products():
     products = Product.all_products()
-
+    
 
     if request.method == "POST":
         if 'product_details' in request.form:

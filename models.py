@@ -18,6 +18,25 @@ class Customer(db.Model):
     card_expiry = db.Column(db.String)
     card_cvc = db.Column(db.Integer)
 
+    @classmethod
+    def add_customer(cls, first_name, last_name, email, phone, address):
+        new_customer = Customer(first_name=first_name, last_name=last_name, email=email, phone=phone,address=address)
+        db.session.add(new_customer)
+        db.session.commit()
+        return new_customer
+    # retrieve customer entry to add remaining details
+    @classmethod
+    def add_payment(cls, customer_id, card_number, card_expiry, card_cvc):
+        customer = cls.query.get(customer_id)
+
+        if customer:
+            customer.card_number = card_number
+            customer.card_expiry = card_expiry 
+            customer.card_cvc = card_cvc
+            db.session.commit()
+            return customer
+        else:
+            return "customer not found"
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
