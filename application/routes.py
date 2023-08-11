@@ -75,12 +75,15 @@ def success(customer_id):
 
     past_orders=Order.past_orders(customer_id)
 
-    return render_template('success.html', past_orders=past_orders)
+    last_order = Order.last_order(customer_id)
+
+    return render_template('success.html', past_orders=past_orders, last_order=last_order)
 
 @app.route('/products', methods=["GET", "POST"])
 def products():
     products = Product.all_products()
-    
+
+
 
     if request.method == "POST":
         if 'product_details' in request.form:
@@ -88,9 +91,7 @@ def products():
         elif 'add_basket' in request.form:
             id = request.form['add_basket']
             BasketItem.add_to_basket(product_id=id)
-            flash("item added to your basket")
     
-
     return render_template ('products.html', products=products)
 
 @app.route('/products/veg')
@@ -103,18 +104,41 @@ def veg_products():
         elif 'add_basket' in request.form:
             id = request.form['add_basket']
             BasketItem.add_to_basket(product_id=id)
-            flash("item added to your basket")
             return redirect ('/products/veg')
 
     return render_template ('products.html', products=products) 
 
-@app.route('/products/<product>')
+@app.route('/products/<product>', methods=["GET", "POST"])
 def view_product(product):
 
     product = Product.product_by_id(product)
+    message = request.args.get('message')
+
+    if request.method == "POST":
+        if 'add_basket' in request.form:
+            id = request.form['add_basket']
+            BasketItem.add_to_basket(product_id=id)
+            return redirect (url_for('view_product', product=id, message="Item added to your basket"))
+        
     
-    return render_template ('product.html', product=product)
+    return render_template ('product.html', product=product, message=message)
 
 @app.route('/category')
 def category():
     return render_template ('category.html')
+
+@app.route('/order/<int:order_id>')
+def order(order_id):
+
+    order = Order.specific_order(order_id)
+    items = OrderItem.query.filter_by(order_id=order_id).all() 
+
+    product_names = {} 
+
+    for item in items:
+        product_id = item.product_id
+        product = Product.query.get(product_id)
+        if product:
+            product_names[item.id] = product.product_name
+
+    return render_template ('order.html', order=order, items=items, product_names=product_names)

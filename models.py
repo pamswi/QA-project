@@ -65,6 +65,9 @@ class Order(db.Model):
     order_date = db.Column(db.String)
     total_amount = db.Column(db.Integer)
 
+    items = db.relationship('OrderItem', backref='order', lazy=True)
+
+
     @classmethod
     def add_order(cls, customer_id, order_date, total_amount):
         new_order=Order(customer_id=customer_id,order_date=order_date, total_amount=total_amount)
@@ -76,6 +79,16 @@ class Order(db.Model):
     def past_orders(cls, customer_id):
         past_orders = cls.query.filter_by(customer_id=customer_id).all()
         return past_orders
+    
+    @classmethod
+    def last_order(cls, customer_id):
+        last_order = cls.query.filter_by(customer_id=customer_id).order_by(cls.id.desc()).first()
+        return last_order
+    
+    @classmethod
+    def specific_order(cls, order_id):
+        order = cls.query.filter_by(id=order_id).first()
+        return order
 
 
 class OrderItem(db.Model):
@@ -149,3 +162,5 @@ class BasketItem(db.Model):
                     return "Item not found in the basket."
             else:
                 return "Product not found."
+            
+

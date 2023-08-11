@@ -2,7 +2,7 @@
 
 <div class="container mt-4">
     <div class="alert alert-success" role="alert">
-        Order Successful! Click <a href="">here</a> to view your order.
+        Order Successful! Click <a href="{{ url_for('order', order_id=last_order.id) }}">here</a> to view your order.
     </div>
 
     <h4 class="mb-3">Past Orders</h4>
@@ -13,6 +13,7 @@
                 <th>Order ID</th>
                 <th>Date</th>
                 <th>Amount</th>
+                <th></th>
                 <!-- Add more columns as needed -->
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ order.order_date }}</td>
                 <td>£{{ order.total_amount }}</td>
                 <!-- Add more cells as needed -->
+                <td><a href="{{ url_for('order', order_id=order.id) }}">view order</a></td>
             </tr>
             {% endfor %}
         </tbody>

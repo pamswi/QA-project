@@ -1,0 +1,31 @@
+{% include 'navbar.html' %}
+<div class="container">
+    <h2>Order Details</h2>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Date: {{ order.order_date }}</p>
+    <p>Total Amount: {{ order.total_amount }}</p>
+
+    <h3>Ordered Items</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ product_names[item.id] }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.subtotal }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% include 'footer.html' %}
