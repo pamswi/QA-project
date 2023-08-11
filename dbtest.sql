@@ -12,3 +12,6 @@ WHERE oi.order_id = 2;
 
 
 SELECT * from product where veg=True;
+
+INSERT INTO basket_item (product_id, quantity) VALUES (?, ?)]
+parameters: ('5', 1)

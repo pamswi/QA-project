@@ -1,7 +1,45 @@
-{% extends "layout.html" %}
+{% include 'navbar.html' %}
+<div class="container mt-4">
+    <h2>Your Shopping Basket</h2>
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                {% set basket_total = 0 %}
 
-{% block content %}
-    <div class="content">
-        <h1>test</h1>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product, count in products %}
+                    <tr>
+                        <td>{{ product.product_name }}</td>
+                        <td>{{ count }}</td>
+                        <td>£{{ product.price }}</td>
+                        <td>£{{ product.price * count }}</td>
+                        <td>
+                            <form method="POST" action="/basket">
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <button class="btn btn-danger btn-sm" name="remove_basket">Remove</button>
+                            </form>
+                        </td>
+                        {% set basket_total = basket_total + (product.price * count) %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <strong>Total:</strong>
+                <span class="badge badge-success">£{{ basket_total }}</span>
+            </div>
+        </div>
     </div>
-{% endblock %}
+    <button class="btn btn-primary mt-3">Checkout</button>
+</div>
+{% include 'footer.html' %}

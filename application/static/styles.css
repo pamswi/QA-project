@@ -19,3 +19,8 @@
 .section-content {
   margin-top: 10px;
 } 
+
+.card-img {
+  height: 200px; /* Adjust this value as needed */
+  object-fit: cover;
+}

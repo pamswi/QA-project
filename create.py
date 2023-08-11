@@ -19,7 +19,7 @@ with app.app_context():
     Product(product_name='White Pizza', description='Creamy white sauce, mozzarella cheese, ricotta cheese, spinach, and garlic.', price=11.99, img='white_pizza', veg=True, available=True),
     Product(product_name='Buffalo Chicken', description='Spicy buffalo sauce, mozzarella cheese, grilled chicken, red onions, and a drizzle of ranch dressing.', price=12.99, img='buffalo_chicken', veg=False, available=True),
     Product(product_name='Pesto Delight', description='Pesto sauce, mozzarella cheese, sun-dried tomatoes, artichoke hearts, and feta cheese.', price=12.99, img='pesto_delight', veg=True, available=True),
-    Product(product_name='Sausage & Onion', description='Pizza with tomato sauce, mozzarella cheese, Italian sausage, and caramelized onions.', price=11.99, img='sausage_onion', veg=False, available=True)
+    Product(product_name='Sausage and Onion', description='Pizza with tomato sauce, mozzarella cheese, Italian sausage, and caramelized onions.', price=11.99, img='sausage_onion', veg=False, available=True)
 ]
     db.session.add_all(test_pizzas)
     db.session.commit()

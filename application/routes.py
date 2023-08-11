@@ -1,12 +1,13 @@
 from application import app
-from flask import render_template
-from models import Product
+from flask import render_template, request, flash, redirect
+from models import Product, BasketItem
 
 '''
 the following .py file defines all known routes across the site
 '''
 @app.route('/')
 def home():
+   
     return render_template ('home.html')
 
 @app.route('/aboutus')
@@ -14,9 +15,19 @@ def about():
     return render_template ('about.html')
 
 
-@app.route('/basket')
+@app.route('/basket', methods=["GET", "POST"])
 def basket():
-    return render_template ('basket.html')
+    products = BasketItem.all_basket()
+
+    if request.method == "POST":
+        if 'remove_basket' in request.form:
+            id = request.form['product_id']
+            print(id)
+            BasketItem.remove_basket(id)
+            return redirect('/basket')
+
+
+    return render_template ('basket.html', products=products)
 
 @app.route('/contactus')
 def contact():
@@ -30,26 +41,43 @@ def checkout():
 def payment():
     return render_template ('payment.html')
 
-@app.route('/products')
+@app.route('/products', methods=["GET", "POST"])
 def products():
-
-    data = Product.product_by_id(1)
-    print(data)
-
     products = Product.all_products()
-    print(products)
 
-    for item in products:
-        print(item.product_name)
+
+    if request.method == "POST":
+        if 'product_details' in request.form:
+            id = request.form['product_details']
+        elif 'add_basket' in request.form:
+            id = request.form['add_basket']
+            BasketItem.add_to_basket(product_id=id)
+            flash("item added to your basket")
+    
 
     return render_template ('products.html', products=products)
+
+@app.route('/products/veg')
+def veg_products():
+    products = Product.veg_products()
+
+    if request.method == "POST":
+        if 'product_details' in request.form:
+            id = request.form['product_details']
+        elif 'add_basket' in request.form:
+            id = request.form['add_basket']
+            BasketItem.add_to_basket(product_id=id)
+            flash("item added to your basket")
+            return redirect ('/products/veg')
+
+    return render_template ('products.html', products=products) 
 
 @app.route('/products/<product>')
 def view_product(product):
 
-
+    product = Product.product_by_id(product)
     
-    return render_template ('product.html')
+    return render_template ('product.html', product=product)
 
 @app.route('/category')
 def category():
