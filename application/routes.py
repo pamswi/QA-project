@@ -1,6 +1,7 @@
 from application import app
 from flask import render_template, request, flash, redirect, url_for
-from models import Product, BasketItem, Customer
+from models import Product, BasketItem, Customer, Order, OrderItem
+from datetime import date
 
 '''
 the following .py file defines all known routes across the site
@@ -18,6 +19,7 @@ def about():
 @app.route('/basket', methods=["GET", "POST"])
 def basket():
     products = BasketItem.all_basket()
+    print(products)
 
     if request.method == "POST":
         if 'remove_basket' in request.form:
@@ -36,7 +38,6 @@ def contact():
 @app.route('/checkout', methods=["GET", "POST"])
 def checkout():
     products = BasketItem.all_basket()
-    details = []
     if request.method == "POST":
         first_name = request.form['first_name']
         last_name = request.form['last_name']
@@ -44,13 +45,6 @@ def checkout():
         phone  = request.form['phone']
         address = request.form['address']
 
-        details.append({
-            'first_name': first_name,
-            'last_name': last_name,
-            'email': email,
-            'phone': phone,
-            'address': address
-        })
         new_customer =Customer.add_customer(first_name, last_name, email, phone, address)
         return redirect (url_for('payment', customer_id=new_customer.id))
 
@@ -67,10 +61,21 @@ def payment(customer_id):
 
         update_customer = Customer.add_payment(customer_id, card_number, card_expiry, card_cvc)
 
-
-
-
+        if 'success' in request.form:
+            basket_total = BasketItem.basket_total()
+            new_order = Order.add_order(customer_id, date.today(), basket_total)            
+            OrderItem.ordered_items(new_order.id)
+            BasketItem.empty_basket()
+            return redirect (url_for('success', customer_id=update_customer.id))
+        
     return render_template ('payment.html', customer_id=customer_id)
+
+@app.route('/success/<int:customer_id>')
+def success(customer_id):
+
+    past_orders=Order.past_orders(customer_id)
+
+    return render_template('success.html', past_orders=past_orders)
 
 @app.route('/products', methods=["GET", "POST"])
 def products():

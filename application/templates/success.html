@@ -1,0 +1,33 @@
+{% include 'navbar.html' %}
+
+<div class="container mt-4">
+    <div class="alert alert-success" role="alert">
+        Order Successful! Click <a href="">here</a> to view your order.
+    </div>
+
+    <h4 class="mb-3">Past Orders</h4>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in past_orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.order_date }}</td>
+                <td>£{{ order.total_amount }}</td>
+                <!-- Add more cells as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% include 'footer.html' %}

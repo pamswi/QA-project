@@ -65,6 +65,19 @@ class Order(db.Model):
     order_date = db.Column(db.String)
     total_amount = db.Column(db.Integer)
 
+    @classmethod
+    def add_order(cls, customer_id, order_date, total_amount):
+        new_order=Order(customer_id=customer_id,order_date=order_date, total_amount=total_amount)
+        db.session.add(new_order)
+        db.session.commit()
+        return new_order
+    
+    @classmethod
+    def past_orders(cls, customer_id):
+        past_orders = cls.query.filter_by(customer_id=customer_id).all()
+        return past_orders
+
+
 class OrderItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column('order_id', db.Integer, db.ForeignKey('order.id'))
@@ -72,11 +85,22 @@ class OrderItem(db.Model):
     quantity = db.Column(db.Integer)
     subtotal = db.Column(db.Integer)
 
+    @classmethod
+    def ordered_items(cls, order_id):
+        basket = BasketItem.all_basket()
+        for item, quantity in basket:
+            subtotal = quantity * item.price
+            new_item = OrderItem(order_id=order_id, product_id=item.id, quantity=quantity, subtotal=subtotal)
+            db.session.add(new_item)
+        db.session.commit()
 
+        
 class BasketItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column('product_id', db.Integer, db.ForeignKey('product.id'))
     quantity = db.Column(db.Integer, default=1)
+
+    product = db.relationship('Product', backref='basket_items')
     
     @classmethod
     def add_to_basket(cls, product_id):
@@ -95,6 +119,17 @@ class BasketItem(db.Model):
         
         return products_with_counts
     
+    @classmethod
+    def basket_total(cls):
+        basket_items = cls.query.all()
+        total_cost = sum(item.product.price * item.quantity for item in basket_items)
+        return total_cost
+    
+    @classmethod
+    def empty_basket(cls):
+        cls.query.delete()
+        db.session.commit()
+    
 
     @classmethod
     def remove_basket(cls, product_id):
@@ -102,17 +137,12 @@ class BasketItem(db.Model):
             product = Product.query.get(product_id)
 
             if product:
-                # Get the basket item for the product
                 basket_item = BasketItem.query.filter_by(product_id=product_id).first()
-
                 if basket_item:
-                    # If quantity is more than 1, reduce quantity by one
                     if basket_item.quantity > 1:
                         basket_item.quantity -= 1
                     else:
-                        # If quantity is 1, remove the item from the basket
                         db.session.delete(basket_item)
-
                     db.session.commit()
                     return "Item removed from the basket."
                 else:
