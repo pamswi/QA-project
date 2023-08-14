@@ -12,10 +12,10 @@ class Customer(db.Model):
     first_name = db.Column(db.String(30))
     last_name = db.Column(db.String(30))
     email = db.Column(db.String(40))  # assuming email validation is handled elsewhere
-    phone = db.Column(db.Integer)
-    address = db.Column(db.String)
-    card_number = db.Column(db.Integer)
-    card_expiry = db.Column(db.String)
+    phone = db.Column(db.String(20))
+    address = db.Column(db.String(255))
+    card_number = db.Column(db.String(20))
+    card_expiry = db.Column(db.String(10))
     card_cvc = db.Column(db.Integer)
 
     @classmethod
@@ -41,9 +41,9 @@ class Customer(db.Model):
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_name = db.Column(db.String(30))
-    description = db.Column(db.String)
+    description = db.Column(db.String(1000))
     price = db.Column(db.Integer)
-    img = db.Column(db.String)
+    img = db.Column(db.String(200))
     veg = db.Column(db.Boolean)
     available = db.Column(db.Boolean, default=True)
 
@@ -62,7 +62,7 @@ class Product(db.Model):
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column('customer_id', db.Integer, db.ForeignKey('customer.id'))
-    order_date = db.Column(db.String)
+    order_date = db.Column(db.String(15))
     total_amount = db.Column(db.Integer)
 
     items = db.relationship('OrderItem', backref='order', lazy=True)
