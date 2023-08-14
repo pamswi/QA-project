@@ -8,14 +8,14 @@
         </div>
         {% endif %}
 
-       
-        <div class="row mb-4">
-            <div class="col-md-12 d-flex align-items-center">
-                <p class="mr-3">Browse by product categories:</p>
-                <a href="/products" class="btn btn-secondary btn-sm mr-2">Browse All</a>
-                <a href="/products/veg" class="btn btn-secondary btn-sm">Browse Veg</a>
-            </div>
-        </div>
+        <div class="container mt-4">
+            <img src="{{ url_for('static', filename='menu.jpg')}}" alt="menu" id="menu">
+            <p class="view-by-category mb-3">View by category</p>
+            <ul class="no-bullet-list">
+            <li><a href="/products" class="btn btn btn-light">Browse All</a></li>
+            <li><a href="/products/veg" class="btn btn btn-light">Browse Veg</a></li>
+            </ul>
+          </div>
 
         <div class="row">
             {% for product in products %}
@@ -29,9 +29,9 @@
                         <div class="mt-auto d-flex justify-content-between">
                             <form action="/products" method="post">
                                 <input type="hidden" name="add_basket" value="{{ product.id }}">
-                                <button type="submit" class="btn btn-primary btn-sm">Add to Basket</button>
+                                <button type="submit" type="button" class="btn btn-dark">Add to Basket</button>
                             </form>
-                            <a href="/products/{{product.id}}" class="btn btn-secondary btn-sm" name="product_details" value="{{ product.id }}">Show Details</a>
+                            <a href="/products/{{product.id}}" class="btn btn-light" name="product_details" value="{{ product.id }}">Show Details</a>
                         </div>
                     </div>
                 </div>
@@ -39,5 +39,9 @@
             {% endfor %}
         </div>
     </div>
+    <br>
+    <br>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
 {% include 'footer.html' %}

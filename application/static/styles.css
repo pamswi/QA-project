@@ -1,3 +1,4 @@
+
 .section {
   width: 80%;
   max-width: 800px;
@@ -21,7 +22,7 @@
 } 
 
 .card-img {
-  height: 200px; /* Adjust this value as needed */
+  height: 200px; 
   object-fit: cover;
 }
 .hero {
@@ -41,7 +42,7 @@
 }
 
 .navbar-brand img {
-  max-height: 60px; /* Adjust the height as needed */
+  max-height: 50px; 
   width: auto; /* Maintain aspect ratio */
 }
 
@@ -55,4 +56,55 @@
 
 .back-link {
   text-decoration: none;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+.footer.sticky {
+  position: fixed;
+  bottom: 0;
+}
+
+  
+.container {
+  text-align: center;
+}
+
+#menu {
+  max-width: 100%;
+  height: auto;
+
+}
+
+.view-by-category {
+  font-size: 18px;
+  color: #6c757d;
+}
+
+.btn-browse {
+  font-size: 14px;
+}
+
+.no-bullet-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  
+}
+
+.no-bullet-list li {
+  margin: 0 10px;
+  color: #333;
+}
+
+.store-info {
+  margin-top:100px;
 }

@@ -1,5 +1,7 @@
 {% include 'navbar.html' %}
 <body>
+
+  
 <div class="container mt-4">
     <h2>Your Shopping Basket</h2>
     <div class="card">
@@ -25,7 +27,7 @@
                         <td>
                             <form method="POST" action="/basket">
                                 <input type="hidden" name="product_id" value="{{ product.id }}">
-                                <button class="btn btn-danger btn-sm" name="remove_basket">Remove</button>
+                                <button class="btn btn-dark" name="remove_basket">Remove</button>
                             </form>
                         </td>
                     </tr>
@@ -39,7 +41,7 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-primary mt-3" href="/checkout">Checkout</a>
+    <a class="btn btn-light mt-3" href="/checkout">Checkout</a>
 </div>
 
 

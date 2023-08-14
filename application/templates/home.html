@@ -1,9 +1,12 @@
 {% include 'navbar.html' %}
-
-<section class="hero">
+<body class="d-flex flex-column">
+  <section class="hero">
     <h2 class="display-4">Delicious Pizza Creations</h2>
     <p class="lead">Indulge in a world of mouthwatering flavors.</p>
     <a href="/products" class="btn btn-light btn-lg">Order Now</a>
   </section>
 
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
 {% include 'footer.html' %}
+
