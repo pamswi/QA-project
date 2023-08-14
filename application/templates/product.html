@@ -1,24 +1,32 @@
 {% include 'navbar.html' %}
-
-<div class="container mt-4">
-    {% if message %}
-<div class="alert alert-success" role="alert">
-    {{ message }}
-</div>
-{% endif %}
-
-    <div class="row">
-        <div class="col-md-6">
-            <img src="{{ url_for('static', filename=product.product_name + '.jpg') }}" class="img-fluid" alt="{{ product.product_name }}">
+<body>
+    
+    <div class="container mt-4">
+        {% if message %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
         </div>
-        <div class="col-md-6">
-            <h2>{{ product.product_name }}</h2>
-            <p>{{ product.description }}</p>
-            <p>Price: £{{ product.price }}</p>
-            <form action="{{ url_for('view_product', product=product.id) }}" method="post">
-                <button type="submit" class="btn btn-primary" name="add_basket" value="{{ product.id }}">Add to Basket</button>
-            </form>
+        {% endif %}
+    
+        <a href="{{ url_for('products') }}" class="back-link">&lt; Back to All Products</a>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="image-container text-center"> <!-- Center the image -->
+                    <img src="{{ url_for('static', filename=product.product_name + '.jpg') }}" class="large-image img-fluid rounded" alt="{{ product.product_name }}">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1 class="product-title">{{ product.product_name }}</h1>
+                <p class="lead product-description">{{ product.description }}</p>
+                <p class="product-price mt-3">Price: £{{ product.price }}</p>
+                <form action="{{ url_for('view_product', product=product.id) }}" method="post">
+                    <button type="submit" class="btn btn-primary mt-3" name="add_basket" value="{{ product.id }}">Add to Basket</button>
+                </form>
+                <p class="mt-4 product-info">Experience the deliciousness:</p>
+                <p class="product-info">Pizza starts with a dough made from flour, water, yeast, and salt. After rising, the dough is rolled out and topped with tomato sauce. Next comes a layer of cheese, usually mozzarella. Toppings like pepperoni, veggies, and more are added. The pizza is baked in a hot oven, melting the cheese and cooking everything to perfection. Once done, it's sliced and served with optional garnishes like basil and olive oil. The result is a mouthwatering combination of crispy crust, gooey cheese, and flavorful toppings that's hard to resist.</p>
+            </div>
         </div>
     </div>
-</div>
+    </body>
 {% include 'footer.html' %}

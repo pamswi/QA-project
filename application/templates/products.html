@@ -2,33 +2,42 @@
 
 <body>
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-12 mb-4">
-                <p>Product categories</p>
-                <a href="/products" class="btn btn-secondary">Browse All</a>
-                <a href="/products/veg" class="btn btn-secondary">Browse Veg</a>
+        {% if message %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+        {% endif %}
+
+       
+        <div class="row mb-4">
+            <div class="col-md-12 d-flex align-items-center">
+                <p class="mr-3">Browse by product categories:</p>
+                <a href="/products" class="btn btn-secondary btn-sm mr-2">Browse All</a>
+                <a href="/products/veg" class="btn btn-secondary btn-sm">Browse Veg</a>
             </div>
         </div>
-      <div class="row">
-          {% for product in products %}
-          <div class="col-md-4 mb-4">
-              <div class="card">
-                  <img src="{{ url_for('static', filename=product.product_name + '.jpg') }}" class="card-img card-img-top" alt="{{ product_name }}">
-                  <div class="card-body">
-                      <h5 class="card-title">{{ product.product_name }}</h5>
-                      <p class="card-text">{{ product.description }}</p>
-                      <p class="card-text">£{{ product.price }}</p>
-                      <form action="/products" method="post">
-                        <input type="hidden" name="add_basket" value="{{ product.id }}">
-                        <button type="submit" class="btn btn-primary">Add to Basket</button>
-                    </form>
-                      <a href="/products/{{product.id}}" class="btn btn-secondary" name="product_details" value="{{ product.id }}">See Product Details</a>
-                  </div>
-              </div>
-          </div>
-          {% endfor %}
-      </div>
 
-  </div>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename=product.product_name + '.jpg') }}" class="card-img card-img-top" alt="{{ product_name }}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ product.product_name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text">£{{ product.price }}</p>
+                        <div class="mt-auto d-flex justify-content-between">
+                            <form action="/products" method="post">
+                                <input type="hidden" name="add_basket" value="{{ product.id }}">
+                                <button type="submit" class="btn btn-primary btn-sm">Add to Basket</button>
+                            </form>
+                            <a href="/products/{{product.id}}" class="btn btn-secondary btn-sm" name="product_details" value="{{ product.id }}">Show Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 {% include 'footer.html' %}

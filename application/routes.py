@@ -19,12 +19,10 @@ def about():
 @app.route('/basket', methods=["GET", "POST"])
 def basket():
     products = BasketItem.all_basket()
-    print(products)
 
     if request.method == "POST":
         if 'remove_basket' in request.form:
             id = request.form['product_id']
-            print(id)
             BasketItem.remove_basket(id)
             return redirect('/basket')
 
@@ -82,7 +80,7 @@ def success(customer_id):
 @app.route('/products', methods=["GET", "POST"])
 def products():
     products = Product.all_products()
-
+    message = request.args.get('message')
 
 
     if request.method == "POST":
@@ -91,8 +89,9 @@ def products():
         elif 'add_basket' in request.form:
             id = request.form['add_basket']
             BasketItem.add_to_basket(product_id=id)
+            return redirect (url_for('products', product=id, message="Item added to your basket"))
     
-    return render_template ('products.html', products=products)
+    return render_template ('products.html', products=products, message=message)
 
 @app.route('/products/veg')
 def veg_products():

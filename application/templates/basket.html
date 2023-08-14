@@ -1,11 +1,10 @@
 {% include 'navbar.html' %}
+<body>
 <div class="container mt-4">
     <h2>Your Shopping Basket</h2>
     <div class="card">
         <div class="card-body">
             <table class="table">
-                {% set basket_total = 0 %}
-
                 <thead>
                     <tr>
                         <th>Product Name</th>
@@ -16,19 +15,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% set basket_total = 0 %}
                     {% for product, count in products %}
                     <tr>
                         <td>{{ product.product_name }}</td>
                         <td>{{ count }}</td>
                         <td>£{{ product.price }}</td>
-                        <td>£{{ product.price * count }}</td>
+                        <td class="product-total" data-product-total="{{ product.price * count }}">£{{ product.price * count }}</td>
                         <td>
                             <form method="POST" action="/basket">
                                 <input type="hidden" name="product_id" value="{{ product.id }}">
                                 <button class="btn btn-danger btn-sm" name="remove_basket">Remove</button>
                             </form>
                         </td>
-                        {% set basket_total = basket_total + (product.price * count) %}
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -36,10 +35,14 @@
             <hr>
             <div class="d-flex justify-content-between">
                 <strong>Total:</strong>
-                <span class="badge badge-success">£{{ basket_total }}</span>
+                <span id="basketTotal" class="badge badge-success">£{{ basket_total }}</span>
             </div>
         </div>
     </div>
     <a class="btn btn-primary mt-3" href="/checkout">Checkout</a>
 </div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
 {% include 'footer.html' %}
