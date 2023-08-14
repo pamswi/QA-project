@@ -2,19 +2,16 @@
 <div class="container m5-4">
     <form method="POST" action="{{ url_for('payment', customer_id=customer_id) }}">
         <div class="form-check">
+            <br>
             <input type="checkbox" class="form-check-input" id="same-address">
-            <label class="form-check-label" for="same-address">Shipping address is the same as my billing
+            <label class="form-check-label" for="same-address">Delivery address is the same as my billing
                 address</label>
         </div>
 
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this information for next time</label>
-        </div>
 
         <hr class="my-4">
 
-        <h4 class="mb-3">Payment</h4>
+        <h4 class="mb-3">Please provide your Payment Details</h4>
 
         <div class="my-3">
             <div class="form-check">
@@ -63,7 +60,7 @@
         </div>
 
         <div class="mt-4">
-            <button class="btn btn-primary" type="submit" name="success">Place Order</button>
+            <button class="btn btn-dark" type="submit" name="success">Place Order</button>
         </div>
     </form>
 </div>

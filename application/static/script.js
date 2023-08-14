@@ -40,3 +40,15 @@ function updateGrandTotal() {
 
 // Call the function to calculate and update the grand total initially
 updateGrandTotal()
+
+window.addEventListener('scroll', function() {
+    const footer = document.querySelector('.footer');
+    const contentWrapper = document.querySelector('.content-wrapper');
+    const threshold = contentWrapper.offsetHeight - window.innerHeight;
+
+    if (window.scrollY >= threshold) {
+      footer.classList.add('sticky');
+    } else {
+      footer.classList.remove('sticky');
+    }
+  });
