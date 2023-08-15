@@ -122,9 +122,7 @@ def view_product(product):
     
     return render_template ('product.html', product=product, message=message)
 
-@app.route('/category')
-def category():
-    return render_template ('category.html')
+
 
 @app.route('/order/<int:order_id>')
 def order(order_id):
