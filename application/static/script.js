@@ -1,3 +1,5 @@
+
+// submitForm() function handles contact form submission
 function submitForm() {
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
@@ -6,8 +8,7 @@ function submitForm() {
 
     var resultDiv = document.getElementById("result");
 
-    // You can perform further validation here if needed
-    
+
     // Display a loading message
     resultDiv.innerHTML = "Sending...";
 
@@ -24,7 +25,7 @@ function submitForm() {
     }, 2000);
 }
 
-// Function to calculate and update the grand total
+// updateGrandTotal() function calculates and updates the grand total in the basket and on the checkout page
 function updateGrandTotal() {
     var totalElements = document.querySelectorAll('.product-total');
     var grandTotal = 0;
@@ -41,6 +42,8 @@ function updateGrandTotal() {
 // Call the function to calculate and update the grand total initially
 updateGrandTotal()
 
+
+// the below event listener handles fixed vs sticky footer across pages
 window.addEventListener('scroll', function() {
     const footer = document.querySelector('.footer');
     const contentWrapper = document.querySelector('.content-wrapper');
