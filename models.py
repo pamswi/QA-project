@@ -4,7 +4,7 @@ from collections import Counter
 
 '''
 first we establish a connection with the shop database
-the following code sets up a database consisting of 4 tables: customers, products, orders and order_items
+the following code sets up a database consisting of 5 tables: customers, products, orders, order_items and basket
 '''
 
 class Customer(db.Model):
