@@ -10,25 +10,32 @@ this particular app was developed using Agile methodology
 functionality of the app:
 
 - landing page which allows to navigate to other sections of the app 
-<img src="screenshots/Pasted image 20230815142734.png">
+<img src="screenshots/Pasted image 20230815143728.png">
+
 - browse products available in the menu section
 <img src="screenshots/Pasted image 20230815142708.png">
+
 - browse menu items by category such as vegetarian options only
-![[Pasted image 20230815143546.png]]
+<img src="screenshots/Pasted image 20230815143546.png">
 
 - view product details such as picture, description and price 
-![[Pasted image 20230815142734.png]]
+<img src="screenshots/Pasted image 20230815142734.png">
+
 - add and remove products from the basket 
-![[Pasted image 20230815142807.png]]
+<img src="screenshots/Pasted image 20230815142807.png">
+
 - checkout the current order by providing customer information such as name, last name, phone number, email address
-![[Pasted image 20230815142831.png]]
+<img src="screenshots/Pasted image 20230815142831.png">
+
 -  provide payment details so a payment simulation can be conducted
-![[Pasted image 20230815143119.png]]
+<img src="screenshots/Pasted image 20230815143119.png">
+
 - view the last placed order as well as any other previous orders
-![[Pasted image 20230815143239.png]]
-![[Pasted image 20230815143323.png]]
+<img src="screenshots/Pasted image 20230815143239.png">
+<img src="screenshots/Pasted image 20230815143323.png">
+
 - lastly, a contact form has been added to enable customers to send enquiries or feedback easily
-![[Pasted image 20230815144428.png]]
+<img src="screenshots/Pasted image 20230815144428.png">
 
 ## technologies used
 Python version: 3.11.2
@@ -229,60 +236,60 @@ Steps taken:
 	having a Kanban board that served as a dynamic hub for tracking progress while maintaining flexibility in managing requirements and priorities was key to delivering on time and in full 
 	the board was regularly reviewed and updated in daily meetings 
 	
-sprint 1 update
-![[10.jpg]]
+sprint 1 update:
+<img src="screenshots/10.jpg">
 
-sprint 2 update
-![[Pasted image 20230815160406.png]]
+sprint 2 update:
+<img src="screenshots/Pasted image 20230815160406.png">
 
 3. the next step was to draft a database
 	I first created some tables that I thought would be necessary. this draft evolved over time as I was adding more functionality to my app. from below screenshots you will notice that my first database did not include a basket table as I thought I could utilise Python lists instead.
 
-	
-![[22.jpg]]
-basket table added at a later stage:
-![[4.jpg]]
-using Python built-in sqlite enabled me to test various scenarios and input handling.:
-![[Pasted image 20230815161826.png]]
+<img src="screenshots/22.jpg">
 
+basket table added at a later stage:
+<img src="screenshots/4.jpg">
+
+using Python built-in sqlite enabled me to test various scenarios and input handling:
+<img src="screenshots/Pasted image 20230815161826.png">
 
 I was eventually able to add some methods to the classes (tables) I created:
-
-![[1.jpg]]
+<img src="screenshots/1.jpg">
 
 
 Once I was happy with the design, I set up a connection to MySQL database instead of sqlite:
-![[Pasted image 20230815161411.png]]
+<img src="screenshots/Pasted image 20230815161411.png">
+
 The connection was successful and I was able to see changes made in my MySQL workbench:
-
-![[12.jpg]]
-
+<img src="screenshots/12.jpg">
 
 
-4. In the meantime I started designing the actual software: its modules, classes, methods and routes
+
+4. In the meantime I started designing the actual software: its modules, classes, methods and routes:
 	
-![[5.jpg]]
+<img src="screenshots/5.jpg">
 
 Thanks to my Kanban board, this process was  straightforward. The ability to focus on individual components one at a time allowed me to maintain a clear direction and streamline my efforts effectively.
 
 Throughout the process I encountered a number of issues that required closer attention and/or googling, some examples:
-example 1: product name missing from the order page
-![[9.jpg]]
 
-![[Pasted image 20230815162438.png]]
+example 1: product name missing from the order page
+<img src="screenshots/9.jpg">
+
+<img src="screenshots/Pasted image 20230815162438.png">
 
 example 2: grand total for the items in basket not working properly
-![[Pasted image 20230815162628.png]]
 
+<img src="screenshots/Pasted image 20230815162628.png">
 
-![[11.jpg]]
+<img src="screenshots/11.jpg">
 
 example 3: at first I intended to connect to an open API in order to access publicly-available products and corresponding details, however I ran out of free requests very early in the process and decided to hard-code products into my database
 
-![[2.jpg]]
+<img src="screenshots/2.jpg">
+
 example 4: app.py not working after connecting MySQL db until create.py has been created:
-![[14.jpg]]
 
-
+<img src="screenshots/14.jpg">
 
 2. testing (run tests against the code written, manual or automated, validating the code against the requirements)
