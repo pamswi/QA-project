@@ -10,9 +10,9 @@ this particular app was developed using Agile methodology
 functionality of the app:
 
 - landing page which allows to navigate to other sections of the app 
-![[Pasted image 20230815143728.png]]
+![[Pasted image 20230815143728.png]](screenshots\Pasted image 20230815142734.png)
 - browse products available in the menu section
-![[Pasted image 20230815142708.png]]
+![[Pasted image 20230815142708.png]] 
 - browse menu items by category such as vegetarian options only
 ![[Pasted image 20230815143546.png]]
 
