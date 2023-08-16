@@ -1,6 +1,7 @@
 # QA Project: Pam's Crust and Craft
 
 the following project consists of a simple CRUD app developed in Python
+its main functionality is to populate basket items and simulate a sale using checkout and payment routes
 the app is built using back-end Flask micro-framework as well as MySQL database 
 the styling and functionality is powered by HTML, CSS, Bootstrap and JavaScript
 
@@ -48,7 +49,8 @@ all of the other necessary modules are specified in the requirements.txt file wh
 file structure has been tested and allows for importing modules and classes across different .py files
 - **app.py** is set up to act as the main program, so in order to start the app `py app.py` needs to be executed
 	running this file will start the Flask development server on default port 5000
-- **models.py** file contains all of the Python classes and their methods which define the structure of the database tables using SQLAlchemy 
+- **models.py** file contains all of the Python classes and their methods which define the structure of the database tables using SQLAlchemy:
+
 	1. **Customer Class (`Customer`)**:
     
     - Represents the `customers` table in the database.
@@ -56,7 +58,8 @@ file structure has been tested and allows for importing modules and classes acro
     - Provides methods:
         - `add_customer`: Adds a new customer to the database with the provided details.
         - `add_payment`: Updates the payment details (card information) of an existing customer.
-	1. **Product Class (`Product`)**:
+
+	2. **Product Class (`Product`)**:
     
     - Represents the `products` table in the database.
     - Attributes include `id`, `product_name`, `description`, `price`, `img`, `veg`, and `available`, which store product information.
@@ -64,7 +67,7 @@ file structure has been tested and allows for importing modules and classes acro
         - `product_by_id`: Retrieves a product based on its `product_id`.
         - `all_products`: Retrieves all products in the database.
         - `veg_products`: Retrieves all vegetarian products.
-	1. **Order Class (`Order`)**:
+	3. **Order Class (`Order`)**:
     
     - Represents the `orders` table in the database.
     - Attributes include `id`, `customer_id`, `order_date`, and `total_amount` to store order-related information.
@@ -73,13 +76,15 @@ file structure has been tested and allows for importing modules and classes acro
         - `past_orders`: Retrieves all orders for a specific customer.
         - `last_order`: Retrieves the most recent order for a specific customer.
         - `specific_order`: Retrieves a specific order by its `order_id`.
-	1. **OrderItem Class (`OrderItem`)**:
+
+	4. **OrderItem Class (`OrderItem`)**:
     
     - Represents the `order_items` table in the database.
     - Attributes include `id`, `order_id`, `product_id`, `quantity`, and `subtotal` for order item details.
     - Provides a method:
         - `ordered_items`: Creates and adds order items to the `order_items` table based on items in the user's basket.
-	1. **BasketItem Class (`BasketItem`)**:
+
+	5. **BasketItem Class (`BasketItem`)**:
     
     - Represents the `basket` table in the database, which stores items that a customer has added to their basket before placing an order.
     - Attributes include `id`, `product_id`, and `quantity` for basket item details.
@@ -89,59 +94,40 @@ file structure has been tested and allows for importing modules and classes acro
         - `basket_total`: Calculates the total cost of items in the basket.
         - `empty_basket`: Removes all items from the basket.
         - `remove_basket`: Removes a specific product from the basket.
+
 - **create.py** file is designed to populate database with initial data such as products
 	the script initialises the database by dropping any existing entries, if there are any
 	for the app to run successfully and allow basic product handling, this file needs to be executed prior to executing app.py `py create.py`
-- **routes.py** file contains all of the necessary routes for this Flask app. each route defines the corresponding URL as well as functions associated with each route
-	1. **`/` (Home Page)**:
 
-    - Renders the `home.html` template, which  represents the main landing page of the website.
-	1. **`/aboutus` (About Us Page)**:
-    
-    - Renders the `about.html` template, providing information about the website and the company.
-	1. **`/basket` (Basket Page)**:
-    
-    - Renders the `basket.html` template, displaying the items in the user's basket.
+- **routes.py** file contains all of the necessary routes for this Flask app. each route defines the corresponding URL as well as functions associated with each route:
+	1. **`/` (Home Page)**: Renders the `home.html` template, which  represents the main landing page of the website.
+	2. **`/aboutus` (About Us Page)**: Renders the `about.html` template, providing information about the website and the company.
+	3. **`/basket` (Basket Page)**: Renders the `basket.html` template, displaying the items in the user's basket.
     - Handles both GET and POST requests:
         - On a POST request, checks if the user clicked a "remove" button for an item and removes that item from the basket.
         - Redirects back to the basket page after removing an item.
-	1. **`/contactus` (Contact Us Page)**:
-    
-    - Renders the `contact.html` template, which  provides contact information for  the company.
-	1. **`/checkout` (Checkout Page)**:
-    
-    - Renders the `checkout.html` template, where users can provide their details for the order.
+	4. **`/contactus` (Contact Us Page)**: Renders the `contact.html` template, which  provides contact information for  the company.
+	5. **`/checkout` (Checkout Page)**: Renders the `checkout.html` template, where users can provide their details for the order.
     - Handles both GET and POST requests:
         - On a POST request, processes the user's checkout information and redirects to the `payment` route.
-	1. **`/payment/<int:customer_id>` (Payment Page)**:
-    
-    - Renders the `payment.html` template, where users can provide payment details for the order.
+	6. **`/payment/<int:customer_id>` (Payment Page)**: Renders the `payment.html` template, where users can provide payment details for the order.
     - Handles both GET and POST requests:
         - On a POST request, processes the payment information and updates the customer's details.
         - If payment is successful, adds the order to the database and clears the user's basket, then redirects to the `success` route.
-	1. **`/success/<int:customer_id>` (Success Page)**:
-    
-    - Renders the `success.html` template, displaying the user's past orders and showing the most recent order's details.
+	7. **`/success/<int:customer_id>` (Success Page)**: Renders the `success.html` template, displaying the user's past orders and showing the most recent order's details.
     - Retrieves past orders and the last order using the `Order` class methods.
-	1. **`/products` (Products Page)**:
-    
-    - Renders the `products.html` template, displaying a list of all available products.
+	8. **`/products` (Products Page)**: Renders the `products.html` template, displaying a list of all available products.
     - Handles both GET and POST requests:
         - On a POST request, allows users to view product details or add products to the basket.
-	1. **`/products/veg` (Vegetarian Products Page)**:
-    
-    - Renders the `products.html` template, displaying a list of vegetarian products.
+	9. **`/products/veg` (Vegetarian Products Page)**: Renders the `products.html` template, displaying a list of vegetarian products.
     - Handles GET requests:
         - Allows users to view product details or add products to the basket.
-	1. **`/products/<product>` (Individual Product Page)**:
-    
-    - Renders the `product.html` template, displaying details of an individual product.
+	10. **`/products/<product>` (Individual Product Page)**: Renders the `product.html` template, displaying details of an individual product.
     - Handles both GET and POST requests:
         - On a POST request, allows users to add the product to the basket.
-	1. **`/order/<int:order_id>` (Order Page)**:
+	11. **`/order/<int:order_id>` (Order Page)**: Renders the `order.html` template, displaying the details of a specific order.
+    - Retrieves order details and the items in that order using the `Order` and `OrderItem` class methods
     
-    - Renders the `order.html` template, displaying the details of a specific order.
-    - Retrieves order details and the items in that order using the `Order` and `OrderItem` class methods.
 - **__init__.py** file is the initialiser for the app as well as the database
 	creates a Flask application, sets up a connection to a database using SQLAlchemy, and then initialises the application with the database extension
 	please note that the database URI is stored as an environment variable and it is best practice to do so. this keeps sensitive information secure and separate from the code
@@ -158,10 +144,12 @@ file structure has been tested and allows for importing modules and classes acro
 		    - Defines the `create_app()` method to configure the Flask app for testing.
 		    - Implements `setUp()` to create test data in the database before each test case.
 		    - Implements `tearDown()` to clean up the database after each test case.
-		1. `TestViews` Class (Inherits from `TestBase`):
+
+		2. `TestViews` Class (Inherits from `TestBase`):
     
 		    - Contains multiple test methods that correspond to different routes/views in the application.
 		    - Each test method sends an HTTP request using `self.client.get()` or `self.client.post()` and asserts the expected response status code and content.
+
 		The tests simulate user interactions with the application's views by sending GET and POST requests to various routes
 		The POST request tests simulate form submissions and actions like adding items to the basket, removing items from the basket, checking out, and making a payment.
 
@@ -184,6 +172,7 @@ Steps taken:
 	understanding the Minimum Viable Product (MVP) was central to this approach as it represents the essential set of features that deliver value to the users while allowing for a rapid launch
 	
 2. in order to stay focused on the core functionality, I set up a Kanban board and split the requirements into user stories, tasks and sprints:
+
 	**Homepage:** As a user, I want the homepage to be visually appealing, so that I am drawn to explore the website and its offerings.
 	- Design a visually appealing layout for the homepage.
 	- Implement the homepage as the default landing page.
@@ -236,60 +225,87 @@ Steps taken:
 	having a Kanban board that served as a dynamic hub for tracking progress while maintaining flexibility in managing requirements and priorities was key to delivering on time and in full 
 	the board was regularly reviewed and updated in daily meetings 
 	
-sprint 1 update:
-<img src="screenshots/10.jpg">
+    sprint 1 update:
+    <img src="screenshots/10.jpg">
 
-sprint 2 update:
-<img src="screenshots/Pasted image 20230815160406.png">
+    sprint 2 update:
+    <img src="screenshots/Pasted image 20230815160406.png">
 
 3. the next step was to draft a database
 	I first created some tables that I thought would be necessary. this draft evolved over time as I was adding more functionality to my app. from below screenshots you will notice that my first database did not include a basket table as I thought I could utilise Python lists instead.
 
-<img src="screenshots/22.jpg">
+    <img src="screenshots/22.jpg">
 
-basket table added at a later stage:
-<img src="screenshots/4.jpg">
+    basket table added at a later stage:
+    <img src="screenshots/4.jpg">
 
-using Python built-in sqlite enabled me to test various scenarios and input handling:
-<img src="screenshots/Pasted image 20230815161826.png">
+    using Python built-in sqlite enabled me to test various scenarios and input handling:
+    <img src="screenshots/Pasted image 20230815161826.png">
 
-I was eventually able to add some methods to the classes (tables) I created:
-<img src="screenshots/1.jpg">
+    I was eventually able to add some methods to the classes (tables) I created:
+    <img src="screenshots/1.jpg">
 
 
-Once I was happy with the design, I set up a connection to MySQL database instead of sqlite:
-<img src="screenshots/Pasted image 20230815161411.png">
+    Once I was happy with the design, I set up a connection to MySQL database instead of sqlite:
+    <img src="screenshots/Pasted image 20230815161411.png">
 
-The connection was successful and I was able to see changes made in my MySQL workbench:
-<img src="screenshots/12.jpg">
+    The connection was successful and I was able to see changes made in my MySQL workbench:
+    <img src="screenshots/12.jpg">
 
 
 
 4. In the meantime I started designing the actual software: its modules, classes, methods and routes:
 	
-<img src="screenshots/5.jpg">
+    <img src="screenshots/5.jpg">
 
-Thanks to my Kanban board, this process was  straightforward. The ability to focus on individual components one at a time allowed me to maintain a clear direction and streamline my efforts effectively.
+    Thanks to my Kanban board, this process was  straightforward. The ability to focus on individual components one at a time allowed me to maintain a clear direction and streamline my efforts effectively.
 
-Throughout the process I encountered a number of issues that required closer attention and/or googling, some examples:
+    Throughout the process I encountered a number of issues that required closer attention and/or googling, some examples:
 
-example 1: product name missing from the order page
-<img src="screenshots/9.jpg">
+    example 1: product name missing from the order page
+    <img src="screenshots/9.jpg">
 
-<img src="screenshots/Pasted image 20230815162438.png">
+    <img src="screenshots/Pasted image 20230815162438.png">
 
-example 2: grand total for the items in basket not working properly
+    example 2: grand total for the items in basket not working properly
 
-<img src="screenshots/Pasted image 20230815162628.png">
+    <img src="screenshots/Pasted image 20230815162628.png">
 
-<img src="screenshots/11.jpg">
+    <img src="screenshots/11.jpg">
 
-example 3: at first I intended to connect to an open API in order to access publicly-available products and corresponding details, however I ran out of free requests very early in the process and decided to hard-code products into my database
+    example 3: at first I intended to connect to an open API in order to access publicly-available products and corresponding details, however I ran out of free requests very early in the process and decided to hard-code products into my database
 
-<img src="screenshots/2.jpg">
+    <img src="screenshots/2.jpg">
 
-example 4: app.py not working after connecting MySQL db until create.py has been created:
+    <img src="screenshots/Screenshot 2023-08-16 090622.jpg">
 
-<img src="screenshots/14.jpg">
+    example 4: app.py not working after connecting MySQL db until create.py has been executed:
 
-2. testing (run tests against the code written, manual or automated, validating the code against the requirements)
+    <img src="screenshots/14.jpg">
+
+5. While working on the code I started testing 
+
+    Testing holds a crucial role within the agile methodology. Regular testing enables the timely identification of errors in the development process, leading to the preservation of the team's time and valuable resources. In the case of my application, initial testing involved manual procedures where uncomplicated test variables were formulated for input into functions or methods, as illustrated below:
+
+    <img src="screenshots/3.jpg">
+
+    Afterward, I developed a test suite using the pytest framework, which played a pivotal role in automating the testing process and conducting an analysis of the code coverage achieved by the tests. This endeavor involved the integration of the pytest and flask_testing modules to construct the `test_app.py` file:
+
+    <img src="screenshots/15.jpg">
+
+    `pytest` can be executed in the terminal by running:
+    - `py -m pytest --cov=app` 
+    - `py -m pytest --cov=app --cov-report html` to generate a thorough report which can be viewed as a HTML page
+
+    below screenshot shows the latest coverage of 89% which is widely acceptable in the industry
+
+    <img src="screenshots/17.jpg">
+
+6. The final phase encompassed minimising human intervention in both the development and testing of the application. 
+Fortunately, a range of alternatives exist for automating these processes. A widely adopted approach involves the utilisation of an automation server, with Jenkins being a prominent example.
+
+Upon configuring the Jenkins job appropriately, the responsibilities of building and testing were effectively transferred away from me. This shift enabled me to concentrate more on the coding aspect, as the automation framework consistently handled the tasks of building and testing, even for newly incorporated features.
+
+<img src="screenshots/Screenshot 2023-08-16 095719.jpg">
+
+<img src="screenshots/19.jpg">
