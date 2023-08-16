@@ -22,6 +22,7 @@ The development of this application adheres to the Agile methodology, ensuring f
       1. [Agile methodology](#agile-methodology)
       2. [Development Stages](#development-stages)
 2. [Risk Assessment](#risk-assessment)
+3. [Further Improvement](#further-improvement)
 
 
 
@@ -121,30 +122,30 @@ file structure has been tested and allows for importing modules and classes acro
 	1. **`/` (Home Page)**: Renders the `home.html` template, which  represents the main landing page of the website.
 	2. **`/aboutus` (About Us Page)**: Renders the `about.html` template, providing information about the website and the company.
 	3. **`/basket` (Basket Page)**: Renders the `basket.html` template, displaying the items in the user's basket.
-    - Handles both GET and POST requests:
-        - On a POST request, checks if the user clicked a "remove" button for an item and removes that item from the basket.
-        - Redirects back to the basket page after removing an item.
+        - Handles both GET and POST requests:
+            - On a POST request, checks if the user clicked a "remove" button for an item and removes that item from the basket.
+            - Redirects back to the basket page after removing an item.
 	4. **`/contactus` (Contact Us Page)**: Renders the `contact.html` template, which  provides contact information for  the company.
 	5. **`/checkout` (Checkout Page)**: Renders the `checkout.html` template, where users can provide their details for the order.
-    - Handles both GET and POST requests:
-        - On a POST request, processes the user's checkout information and redirects to the `payment` route.
+        - Handles both GET and POST requests:
+            - On a POST request, processes the user's checkout information and redirects to the `payment` route.
 	6. **`/payment/<int:customer_id>` (Payment Page)**: Renders the `payment.html` template, where users can provide payment details for the order.
-    - Handles both GET and POST requests:
-        - On a POST request, processes the payment information and updates the customer's details.
-        - If payment is successful, adds the order to the database and clears the user's basket, then redirects to the `success` route.
+        - Handles both GET and POST requests:
+            - On a POST request, processes the payment information and updates the customer's details.
+            - If payment is successful, adds the order to the database and clears the user's basket, then redirects to the `success` route.
 	7. **`/success/<int:customer_id>` (Success Page)**: Renders the `success.html` template, displaying the user's past orders and showing the most recent order's details.
-    - Retrieves past orders and the last order using the `Order` class methods.
+        - Retrieves past orders and the last order using the `Order` class methods.
 	8. **`/products` (Products Page)**: Renders the `products.html` template, displaying a list of all available products.
-    - Handles both GET and POST requests:
-        - On a POST request, allows users to view product details or add products to the basket.
+        - Handles both GET and POST requests:
+            - On a POST request, allows users to view product details or add products to the basket.
 	9. **`/products/veg` (Vegetarian Products Page)**: Renders the `products.html` template, displaying a list of vegetarian products.
-    - Handles GET requests:
-        - Allows users to view product details or add products to the basket.
+        - Handles GET requests:
+            - Allows users to view product details or add products to the basket.
 	10. **`/products/<product>` (Individual Product Page)**: Renders the `product.html` template, displaying details of an individual product.
-    - Handles both GET and POST requests:
-        - On a POST request, allows users to add the product to the basket.
+        - Handles both GET and POST requests:
+            - On a POST request, allows users to add the product to the basket.
 	11. **`/order/<int:order_id>` (Order Page)**: Renders the `order.html` template, displaying the details of a specific order.
-    - Retrieves order details and the items in that order using the `Order` and `OrderItem` class methods
+        - Retrieves order details and the items in that order using the `Order` and `OrderItem` class methods
     
 - **__init__.py** file is the initialiser for the app as well as the database
 	creates a Flask application, sets up a connection to a database using SQLAlchemy, and then initialises the application with the database extension
@@ -341,6 +342,14 @@ By embracing the Agile methodology, I aimed to create a development process that
 
     ## Risk Assessment
 
+    Risk assessment is one of the most important tools for identifying potential issues, vulnerabilities and uncertainties that could impact the successful completion of a project.
+
+    The process involves systematically analysing and evaluating various factors that could pose a threat to the project's timeline, quality and scope. 
+
+    During the development phase, my Risk Assessment served as a dynamic document that underwent daily reviews. This approach ensured its continuous relevance and enabled the timely identification and resolution of potential issues before they escalated beyond manageable levels.
+
+
+
 | Risk Category         | Risk Description                                 | Mitigation Strategy                          |
 |-----------------------|-------------------------------------------------|----------------------------------------------|
 | Technical Risks       | Potential errors in the database                | Implement regular backups and monitoring.    |
@@ -364,37 +373,50 @@ By embracing the Agile methodology, I aimed to create a development process that
 | Maintenance Risks     | Difficulties in maintaining the application    | Document codebase and maintain clear comments.|
 
 ## Further Improvement
-- Enhance input validation and handling using Flask-Forms: While implementing routes, I employed basic request handling for form data. However, there is room for improvement by integrating Flask-Forms to achieve robust input validation and handling. This step would enhance the security of the application and mitigate potential vulnerabilities. Integrating Flask-Forms is on the roadmap for future enhancements.
+- Enhance **input validation and handling using Flask-Forms**: While implementing routes, I employed basic request handling for form data. However, there is room for improvement by integrating Flask-Forms to achieve robust input validation and handling. This step would enhance the security of the application and mitigate potential vulnerabilities. Integrating Flask-Forms is on the roadmap for future enhancements.
 
 As an illustration, let's consider the `/checkout` route, which could be further improved as follows:
 
-```Python
-# import necessary modules
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Email, Length
+    ```Python
+    # import necessary modules
+    from flask_wtf import FlaskForm
+    from wtforms import StringField, SubmitField
+    from wtforms.validators import DataRequired, Email, Length
 
-# define checkout form using FlaskForm
-class CheckoutForm(FlaskForm):
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
-    address = StringField('Address', validators=[DataRequired(), Length(min=5)])
-    submit = SubmitField('Proceed to Payment')
+    # define checkout form using FlaskForm
+    class CheckoutForm(FlaskForm):
+        first_name = StringField('First Name', validators=[DataRequired()])
+        last_name = StringField('Last Name', validators=[DataRequired()])
+        email = StringField('Email', validators=[DataRequired(), Email()])
+        phone = StringField('Phone Number', validators=[DataRequired()])
+        address = StringField('Address', validators=[DataRequired(), Length(min=5)])
+        submit = SubmitField('Proceed to Payment')
 
-# define route, render defined form & validate with in-built functions
-@app.route('/checkout', methods=["GET", "POST"])
-def checkout():
-    form = CheckoutForm()
-    products = BasketItem.all_basket()
-    
-    if form.validate_on_submit():
-        new_customer = Customer.add_customer(
-            form.first_name.data, form.last_name.data,
-            form.email.data, form.phone.data, form.address.data
-        )
-        return redirect(url_for('payment', customer_id=new_customer.id))
+    # define route, render defined form & validate with in-built functions
+    @app.route('/checkout', methods=["GET", "POST"])
+    def checkout():
+        form = CheckoutForm()
+        products = BasketItem.all_basket()
+        
+        if form.validate_on_submit():
+            new_customer = Customer.add_customer(
+                form.first_name.data, form.last_name.data,
+                form.email.data, form.phone.data, form.address.data
+            )
+            return redirect(url_for('payment', customer_id=new_customer.id))
 
-    return render_template('checkout.html', products=products, form=form)
-```
+        return render_template('checkout.html', products=products, form=form)
+    ```
+
+- **User Authentication and Authorisation**: Implement user authentication and authorisation to ensure that only authorised users can access certain parts of the application. This could involve user registration and login
+
+- **Search Functionality**: Implement a search functionality that allows users to quickly find products or information within your application
+    While it may currently fall outside the scope of the 12 products initially set up, this feature can prove particularly beneficial as your product selection expands, streamlining user navigation and interaction.
+
+- **Rating and Reviews**: Allow users to rate and leave reviews for items they've purchased. Display these ratings and reviews on product pages.
+    This enhancement has the potential to enrich the user experience and bolster the credibility of your web application by offering valuable insights from real customers.
+
+- **API Development**: If applicable, develop a RESTful API to allow integration with other services and platforms.
+    This would open up possibilities for expanding the reach of the application and allowing third-party systems to interact with data and functionalities.
+
+- **Error Handling and Logging**: Implement robust error handling and logging mechanisms to capture and address errors effectively.
