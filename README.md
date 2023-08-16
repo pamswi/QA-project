@@ -329,6 +329,16 @@ By embracing the Agile methodology, I aimed to create a development process that
 
     <img src="screenshots/19.jpg">
 
+    This phase can be streamlined even more by establishing a GitHub webhook. By configuring this webhook, you can automate the initiation of builds based on predefined events, such as a push event to your repository.
+
+    However, it's important to note that due to the limitations of my setup, I was unable to install Jenkins on a virtual machine; instead, it was installed on a Windows system. Unfortunately, this configuration hindered the proper setup of the webhook, resulting in its incomplete implementation. See screenshots below:
+
+    <img src="screenshots/Screenshot 2023-08-16 111624.jpg">
+
+    <img src="screenshots/23.jpg"> 
+
+     <img src="screenshots/24.jpg"> 
+
     ## Risk Assessment
 
 | Risk Category         | Risk Description                                 | Mitigation Strategy                          |
@@ -352,3 +362,39 @@ By embracing the Agile methodology, I aimed to create a development process that
 |                       | Test data not representative of real-world scenarios | Use representative test data for accurate testing.|
 | Deployment and        | Challenges during deployment                   | Automate deployment processes and pre-test.|
 | Maintenance Risks     | Difficulties in maintaining the application    | Document codebase and maintain clear comments.|
+
+## Further Improvement
+- Enhance input validation and handling using Flask-Forms: While implementing routes, I employed basic request handling for form data. However, there is room for improvement by integrating Flask-Forms to achieve robust input validation and handling. This step would enhance the security of the application and mitigate potential vulnerabilities. Integrating Flask-Forms is on the roadmap for future enhancements.
+
+As an illustration, let's consider the `/checkout` route, which could be further improved as follows:
+
+```Python
+# import necessary modules
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Email, Length
+
+# define checkout form using FlaskForm
+class CheckoutForm(FlaskForm):
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    phone = StringField('Phone Number', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired(), Length(min=5)])
+    submit = SubmitField('Proceed to Payment')
+
+# define route, render defined form & validate with in-built functions
+@app.route('/checkout', methods=["GET", "POST"])
+def checkout():
+    form = CheckoutForm()
+    products = BasketItem.all_basket()
+    
+    if form.validate_on_submit():
+        new_customer = Customer.add_customer(
+            form.first_name.data, form.last_name.data,
+            form.email.data, form.phone.data, form.address.data
+        )
+        return redirect(url_for('payment', customer_id=new_customer.id))
+
+    return render_template('checkout.html', products=products, form=form)
+```
