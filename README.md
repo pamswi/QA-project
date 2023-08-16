@@ -1,51 +1,53 @@
 # QA Project: Pam's Crust and Craft
 
-the following project consists of a simple CRUD app developed in Python
-its main functionality is to populate basket items and simulate a sale using checkout and payment routes
-the app is built using back-end Flask micro-framework as well as MySQL database 
-the styling and functionality is powered by HTML, CSS, Bootstrap and JavaScript
+## Introduction
 
-this particular app was developed using Agile methodology 
+The "Pam's Crust and Craft" project involves the development of a simple CRUD (Create, Read, Update, Delete) application in Python. The primary functionality of this application is to manage a virtual shopping experience, allowing users to browse products, add them to their basket, simulate a sale, and view their order history. 
+The application is built using the Flask micro-framework for the back end and utilises a MySQL database for data storage. 
+The front-end components are powered by HTML, CSS, Bootstrap, and JavaScript.
 
-## functionality and usage
-functionality of the app:
+The development of this application adheres to the Agile methodology, ensuring flexibility, collaboration, and iterative development to meet user requirements effectively.
 
-- landing page which allows to navigate to other sections of the app 
+
+## Functionality and Usage
+The application offers the following features:
+
+- A visually appealing landing page with navigation links to different sections of the app.
 <img src="screenshots/Pasted image 20230815143728.png">
 
-- browse products available in the menu section
+- Users can browse products available in the menu section.
 <img src="screenshots/Pasted image 20230815142708.png">
 
-- browse menu items by category such as vegetarian options only
+- Users can filter menu items by category, such as vegetarian options.
 <img src="screenshots/Pasted image 20230815143546.png">
 
-- view product details such as picture, description and price 
+- Detailed information about a product, including its picture, description, and price.
 <img src="screenshots/Pasted image 20230815142734.png">
 
-- add and remove products from the basket 
+- Adding and removing products from the basket. 
 <img src="screenshots/Pasted image 20230815142807.png">
 
-- checkout the current order by providing customer information such as name, last name, phone number, email address
+- Users can provide customer information, including name, last name, phone number, and email address, to proceed with the checkout process.
 <img src="screenshots/Pasted image 20230815142831.png">
 
--  provide payment details so a payment simulation can be conducted
+- Users can simulate the payment process by providing payment details.
 <img src="screenshots/Pasted image 20230815143119.png">
 
-- view the last placed order as well as any other previous orders
+- Users can view their last placed order and previous orders.
 <img src="screenshots/Pasted image 20230815143239.png">
 <img src="screenshots/Pasted image 20230815143323.png">
 
-- lastly, a contact form has been added to enable customers to send enquiries or feedback easily
+- A contact form enables users to send inquiries or feedback easily.
 <img src="screenshots/Pasted image 20230815144428.png">
 
-## technologies used
-Python version: 3.11.2
-Flask version: 2.2.3
-Jinja2 templating engine
+## Technologies used
+    Python version: 3.11.2
+    Flask version: 2.2.3
+    Jinja2 templating engine
 
-all of the other necessary modules are specified in the requirements.txt file which can be executed with pip in order to install all of the dependencies: `pip install -r requirements.txt`
+all of the other necessary modules are defined in the requirements.txt file which can be executed with pip in order to install all of the dependencies: `pip install -r requirements.txt`
 
-## file explanation
+## File Explanation & Structure
 file structure has been tested and allows for importing modules and classes across different .py files
 - **app.py** is set up to act as the main program, so in order to start the app `py app.py` needs to be executed
 	running this file will start the Flask development server on default port 5000
@@ -154,7 +156,7 @@ file structure has been tested and allows for importing modules and classes acro
 		The POST request tests simulate form submissions and actions like adding items to the basket, removing items from the basket, checking out, and making a payment.
 
 
-## development process
+## Development Process
 1. Agile methodology
 2. Database (basket added at a later stage)
 3. API (for products rather than db)
@@ -166,12 +168,12 @@ This project was developed using the Agile methodology, a dynamic and iterative 
 
 By embracing the Agile methodology, I aimed to create a development process that aligns with the evolving nature of software projects. This approach not only allows us to accommodate changes effectively but also enhances our ability to deliver a robust and user-centred product.
 
-Steps taken:
+## Development Stages:
 1. I carefully examined the brief and broken it down into components. This allowed me to identify the core features and functionalities required to meet the project's scope
 	
 	understanding the Minimum Viable Product (MVP) was central to this approach as it represents the essential set of features that deliver value to the users while allowing for a rapid launch
 	
-2. in order to stay focused on the core functionality, I set up a Kanban board and split the requirements into user stories, tasks and sprints:
+2. To maintain focus on the essential functionality, I established a Kanban board and categorised the requirements into user stories, tasks, and sprints.
 
 	**Homepage:** As a user, I want the homepage to be visually appealing, so that I am drawn to explore the website and its offerings.
 	- Design a visually appealing layout for the homepage.
@@ -222,8 +224,10 @@ Steps taken:
 	- Design the layout for the about us page.
 	- Craft content that explains the store's mission, history, and team.
 	- Develop sections that introduce key team members.
-	having a Kanban board that served as a dynamic hub for tracking progress while maintaining flexibility in managing requirements and priorities was key to delivering on time and in full 
-	the board was regularly reviewed and updated in daily meetings 
+
+	Having a Kanban board that served as a dynamic hub for tracking progress while maintaining flexibility in managing requirements and priorities was key to delivering on time and in full 
+	
+    The board was regularly reviewed and updated in daily meetings 
 	
     sprint 1 update:
     <img src="screenshots/10.jpg">
@@ -231,20 +235,19 @@ Steps taken:
     sprint 2 update:
     <img src="screenshots/Pasted image 20230815160406.png">
 
-3. the next step was to draft a database
-	I first created some tables that I thought would be necessary. this draft evolved over time as I was adding more functionality to my app. from below screenshots you will notice that my first database did not include a basket table as I thought I could utilise Python lists instead.
+3. Subsequently, I proceeded to outline a database structure. 
+	Initially, I designed a set of tables that I deemed essential. However, this initial draft underwent iterations as I incorporated additional features into my application. Upon reviewing the screenshots below, you'll observe that my initial database lacked a basket table, as I initially intended to make use of Python lists for this purpose:
 
     <img src="screenshots/22.jpg">
 
-    basket table added at a later stage:
+    Basket table added at a later stage:
     <img src="screenshots/4.jpg">
 
-    using Python built-in sqlite enabled me to test various scenarios and input handling:
+    Using Python built-in sqlite enabled me to test various scenarios and input handling:
     <img src="screenshots/Pasted image 20230815161826.png">
 
     I was eventually able to add some methods to the classes (tables) I created:
     <img src="screenshots/1.jpg">
-
 
     Once I was happy with the design, I set up a connection to MySQL database instead of sqlite:
     <img src="screenshots/Pasted image 20230815161411.png">
@@ -254,7 +257,7 @@ Steps taken:
 
 
 
-4. In the meantime I started designing the actual software: its modules, classes, methods and routes:
+4. In the meantime, I started designing the actual software, outlining its modules, classes, methods and routes:
 	
     <img src="screenshots/5.jpg">
 
@@ -262,24 +265,24 @@ Steps taken:
 
     Throughout the process I encountered a number of issues that required closer attention and/or googling, some examples:
 
-    example 1: product name missing from the order page
+        Example 1: product name missing from the order page
     <img src="screenshots/9.jpg">
 
     <img src="screenshots/Pasted image 20230815162438.png">
 
-    example 2: grand total for the items in basket not working properly
+        Example 2: grand total for the items in basket not working properly
 
     <img src="screenshots/Pasted image 20230815162628.png">
 
     <img src="screenshots/11.jpg">
 
-    example 3: at first I intended to connect to an open API in order to access publicly-available products and corresponding details, however I ran out of free requests very early in the process and decided to hard-code products into my database
+        Example 3: at first I intended to connect to an open API in order to access publicly-available products and corresponding details, however I ran out of free requests very early in the process and decided to hard-code products into my database
 
     <img src="screenshots/2.jpg">
 
     <img src="screenshots/Screenshot 2023-08-16 090622.jpg">
 
-    example 4: app.py not working after connecting MySQL db until create.py has been executed:
+        Example 4: app.py not working after connecting MySQL db until create.py has been executed:
 
     <img src="screenshots/14.jpg">
 
