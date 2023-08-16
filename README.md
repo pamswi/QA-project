@@ -302,10 +302,15 @@ Steps taken:
     <img src="screenshots/17.jpg">
 
 6. The final phase encompassed minimising human intervention in both the development and testing of the application. 
-Fortunately, a range of alternatives exist for automating these processes. A widely adopted approach involves the utilisation of an automation server, with Jenkins being a prominent example.
+    Fortunately, a range of alternatives exist for automating these processes. A widely adopted approach involves the utilisation of an automation server, with Jenkins being a prominent example.
 
-Upon configuring the Jenkins job appropriately, the responsibilities of building and testing were effectively transferred away from me. This shift enabled me to concentrate more on the coding aspect, as the automation framework consistently handled the tasks of building and testing, even for newly incorporated features.
+    Upon configuring the Jenkins job appropriately, the responsibilities of building and testing were effectively transferred away from me. This shift enabled me to concentrate more on the coding aspect, as the automation framework consistently handled the tasks of building and testing, even for newly incorporated features.
 
-<img src="screenshots/Screenshot 2023-08-16 095719.jpg">
+    Screenshot below shows build steps set up for my project:
+    <img src="screenshots/Screenshot 2023-08-16 095719.jpg">
 
-<img src="screenshots/19.jpg">
+    I then added `py create.py` and `py app.py` to run my app on Jenkins server
+
+    Lastly, screenshot below shows some successful builds as well as some saved arctifacts such as html coverage report
+
+    <img src="screenshots/19.jpg">
