@@ -1,5 +1,7 @@
 # QA Project: Pam's Crust and Craft
+<div style="background-color: #333; padding: 10px;">
 <img src="application/static/logo.png">
+</div>
 
 ## Introduction
 
