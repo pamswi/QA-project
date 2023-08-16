@@ -416,7 +416,7 @@ As an illustration, let's consider the `/checkout` route, which could be further
 - **Rating and Reviews**: Allow users to rate and leave reviews for items they've purchased. Display these ratings and reviews on product pages.
     This enhancement has the potential to enrich the user experience and bolster the credibility of your web application by offering valuable insights from real customers.
 
-- **API Development**: If applicable, develop a RESTful API to allow integration with other services and platforms.
+- **API Development**: Develop a RESTful API to allow integration with other services and platforms.
     This would open up possibilities for expanding the reach of the application and allowing third-party systems to interact with data and functionalities.
 
 - **Error Handling and Logging**: Implement robust error handling and logging mechanisms to capture and address errors effectively.
