@@ -1,4 +1,5 @@
 # QA Project: Pam's Crust and Craft
+<img src="application/static/logo.png">
 
 ## Introduction
 
@@ -7,6 +8,19 @@ The application is built using the Flask micro-framework for the back end and ut
 The front-end components are powered by HTML, CSS, Bootstrap, and JavaScript.
 
 The development of this application adheres to the Agile methodology, ensuring flexibility, collaboration, and iterative development to meet user requirements effectively.
+
+
+# Table of Contents
+[QA Project: Pam's Crust and Craft](#qa-project-pams-crust-and-craft)
+   1. [Introduction](#introduction)
+   2. [Functionality and Usage](#functionality-and-usage)
+   3. [Technologies Used](#technologies-used)
+   4. [File Explanation & Structure](#file-explanation--structure)
+   5. [Development Process](#development-process)
+      1. [Agile methodology](#agile-methodology)
+      2. [Development Stages](#development-stages)
+2. [Risk Assessment](#risk-assessment)
+
 
 
 ## Functionality and Usage
@@ -40,7 +54,7 @@ The application offers the following features:
 - A contact form enables users to send inquiries or feedback easily.
 <img src="screenshots/Pasted image 20230815144428.png">
 
-## Technologies used
+## Technologies Used
     Python version: 3.11.2
     Flask version: 2.2.3
     Jinja2 templating engine
@@ -157,18 +171,13 @@ file structure has been tested and allows for importing modules and classes acro
 
 
 ## Development Process
-1. Agile methodology
-2. Database (basket added at a later stage)
-3. API (for products rather than db)
-4. testing
-5. Jenkins CI/CD
 
 ### Agile methodology
 This project was developed using the Agile methodology, a dynamic and iterative approach to software development. Agile methodologies are designed to embrace change, promote collaboration, and enable the delivery of high-quality software in a flexible manner.
 
 By embracing the Agile methodology, I aimed to create a development process that aligns with the evolving nature of software projects. This approach not only allows us to accommodate changes effectively but also enhances our ability to deliver a robust and user-centred product.
 
-## Development Stages:
+### Development Stages:
 1. I carefully examined the brief and broken it down into components. This allowed me to identify the core features and functionalities required to meet the project's scope
 	
 	understanding the Minimum Viable Product (MVP) was central to this approach as it represents the essential set of features that deliver value to the users while allowing for a rapid launch
@@ -317,3 +326,27 @@ By embracing the Agile methodology, I aimed to create a development process that
     Lastly, screenshot below shows some successful builds as well as some saved arctifacts such as html coverage report
 
     <img src="screenshots/19.jpg">
+
+    ## Risk Assessment
+
+| Risk Category         | Risk Description                                 | Mitigation Strategy                          |
+|-----------------------|-------------------------------------------------|----------------------------------------------|
+| Technical Risks       | Potential errors in the database                | Implement regular backups and monitoring.    |
+|                       | Challenges in integrating different components  | Perform thorough testing and validation.    |
+|                       | Difficulty in handling increased workload      | Choose a technology stack with scalability. |
+|                       | Vulnerabilities leading to data breaches       | Implement secure coding practices and audits.|
+| Development Risks     | Expanding scope beyond original requirements   | Define clear scope and prioritise features. |
+|                       | User stories lacking critical information      | Create well-defined user stories.           |
+|                       | Complex and convoluted code                     | Conduct code reviews and maintain simplicity.|
+|                       | Insufficient testing leading to missed issues   | Plan comprehensive testing. |
+| Time and Resource Risks| Overly optimistic timeframes                   | Allocate buffer time and plan realistically.|
+|                       | Shortage of available resources                | Ensure availability and flexibility.    |
+|                       | Delays in dependencies                          | Identify dependencies early and have backups.|
+| Communication Risks   | Misunderstandings due to misaligned expectations| Maintain open communication and clear goals.|
+|                       | Unclear communication leading to confusion    | Use effective communication channels.  |
+| User Experience Risks | Poor user experience and usability              | Gather user feedback and iterate on design. |
+|                       | Inconsistencies in the user interface          | Maintain consistent design language.   |
+| Testing and Quality Risks | Insufficient test coverage                   | Plan and execute thorough testing scenarios.|
+|                       | Test data not representative of real-world scenarios | Use representative test data for accurate testing.|
+| Deployment and        | Challenges during deployment                   | Automate deployment processes and pre-test.|
+| Maintenance Risks     | Difficulties in maintaining the application    | Document codebase and maintain clear comments.|
